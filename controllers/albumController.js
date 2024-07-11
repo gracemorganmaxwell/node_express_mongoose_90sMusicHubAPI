@@ -1,15 +1,5 @@
 const Album = require("../models/albums");
 
-exports.createNinetiesAlbum = async (req, res) => {
-	try {
-		const album = new Album(req.body);
-		await album.save();
-		res.status(201).json(album);
-	} catch (error) {
-		res.status(500).json({ error: error.message });
-	}
-};
-
 exports.getAllNinetiesAlbums = async (req, res) => {
 	try {
 		const albums = await Album.find();
@@ -26,6 +16,16 @@ exports.getNinetiesAlbumById = async (req, res) => {
 			return res.status(404).json({ message: "Album not found" });
 		}
 		res.status(200).json(album);
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+	}
+};
+
+exports.createNinetiesAlbum = async (req, res) => {
+	try {
+		const album = new Album(req.body);
+		await album.save();
+		res.status(201).json(album);
 	} catch (error) {
 		res.status(500).json({ error: error.message });
 	}
