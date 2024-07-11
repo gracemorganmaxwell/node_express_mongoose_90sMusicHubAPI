@@ -2,9 +2,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
-const playlistRoutes = require("./routes/playlistRoutes");
-const albumRoutes = require("./routes/albumRoutes");
-const artistRoutes = require("./routes/artistRoutes");
+const userRoutes = require("./routes/ninetiesUserRoutes");
+const playlistRoutes = require("./routes/ninetiesPlaylistRoutes");
+const albumRoutes = require("./routes/ninetiesAlbumRoutes");
+const artistRoutes = require("./routes/ninetiesArtistRoutes");
+const secureUser = require("./auth/ninetiesSecureUser");
 
 dotenv.config();
 
@@ -19,10 +21,10 @@ mongoose
 	.then(() => console.log("MongoDB connected"))
 	.catch((err) => console.log(err));
 
-
-app.use("/api/playlists", playlistRoutes);
-app.use("/api/albums", albumRoutes);
-app.use("/api/artists", artistRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/playlists", secureUser, playlistRoutes);
+app.use("/api/albums", secureUser, albumRoutes);
+app.use("/api/artists", secureUser, artistRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

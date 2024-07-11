@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const albumController = require("../controllers/ninetiesAlbumController");
+const albumController = require("../controllers/albumController");
 
 router.post("/create-album", albumController.createNinetiesAlbum);
 router.get("/all-albums", albumController.getAllNinetiesAlbums);
