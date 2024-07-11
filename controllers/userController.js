@@ -1,5 +1,5 @@
-const User = require("../models/users");
 const jwt = require("jsonwebtoken");
+const User = require("../models/users");
 const bcrypt = require("bcrypt");
 
 exports.registerNinetiesUser = async (req, res) => {
@@ -26,6 +26,7 @@ exports.loginNinetiesUser = async (req, res) => {
 		const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
 			expiresIn: "1h",
 		});
+		console.log("Generated Token:", token); // Add this line for debugging
 		res.status(200).json({ message: "Authentication successful", token });
 	} catch (error) {
 		res.status(400).json({ error: error.message });
