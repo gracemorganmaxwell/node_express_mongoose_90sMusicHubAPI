@@ -1,6 +1,16 @@
 const Album = require("../models/albums");
 
-exports.getAllAlbums = async (req, res) => {
+exports.createNinetiesAlbum = async (req, res) => {
+	try {
+		const album = new Album(req.body);
+		await album.save();
+		res.status(201).json(album);
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+	}
+};
+
+exports.getAllNinetiesAlbums = async (req, res) => {
 	try {
 		const albums = await Album.find();
 		res.status(200).json(albums);
@@ -9,7 +19,7 @@ exports.getAllAlbums = async (req, res) => {
 	}
 };
 
-exports.getAlbumById = async (req, res) => {
+exports.getNinetiesAlbumById = async (req, res) => {
 	try {
 		const album = await Album.findById(req.params.id);
 		if (!album) {
@@ -21,17 +31,7 @@ exports.getAlbumById = async (req, res) => {
 	}
 };
 
-exports.createAlbum = async (req, res) => {
-	try {
-		const album = new Album(req.body);
-		await album.save();
-		res.status(201).json(album);
-	} catch (error) {
-		res.status(500).json({ error: error.message });
-	}
-};
-
-exports.updateAlbum = async (req, res) => {
+exports.updateNinetiesAlbum = async (req, res) => {
 	try {
 		const album = await Album.findByIdAndUpdate(req.params.id, req.body, {
 			new: true,
@@ -45,7 +45,7 @@ exports.updateAlbum = async (req, res) => {
 	}
 };
 
-exports.deleteAlbum = async (req, res) => {
+exports.deleteNinetiesAlbum = async (req, res) => {
 	try {
 		const album = await Album.findByIdAndDelete(req.params.id);
 		if (!album) {

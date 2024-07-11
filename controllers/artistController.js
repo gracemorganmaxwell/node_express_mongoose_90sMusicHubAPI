@@ -1,6 +1,16 @@
-const Artist = require("../models/artist");
+const Artist = require("../models/artists");
 
-exports.getAllArtists = async (req, res) => {
+exports.createNinetiesArtist = async (req, res) => {
+	try {
+		const artist = new Artist(req.body);
+		await artist.save();
+		res.status(201).json(artist);
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+	}
+};
+
+exports.getAllNinetiesArtists = async (req, res) => {
 	try {
 		const artists = await Artist.find();
 		res.status(200).json(artists);
@@ -9,7 +19,7 @@ exports.getAllArtists = async (req, res) => {
 	}
 };
 
-exports.getArtistById = async (req, res) => {
+exports.getNinetiesArtistById = async (req, res) => {
 	try {
 		const artist = await Artist.findById(req.params.id);
 		if (!artist) {
@@ -21,17 +31,7 @@ exports.getArtistById = async (req, res) => {
 	}
 };
 
-exports.createArtist = async (req, res) => {
-	try {
-		const artist = new Artist(req.body);
-		await artist.save();
-		res.status(201).json(artist);
-	} catch (error) {
-		res.status(500).json({ error: error.message });
-	}
-};
-
-exports.updateArtist = async (req, res) => {
+exports.updateNinetiesArtist = async (req, res) => {
 	try {
 		const artist = await Artist.findByIdAndUpdate(req.params.id, req.body, {
 			new: true,
@@ -45,7 +45,7 @@ exports.updateArtist = async (req, res) => {
 	}
 };
 
-exports.deleteArtist = async (req, res) => {
+exports.deleteNinetiesArtist = async (req, res) => {
 	try {
 		const artist = await Artist.findByIdAndDelete(req.params.id);
 		if (!artist) {
