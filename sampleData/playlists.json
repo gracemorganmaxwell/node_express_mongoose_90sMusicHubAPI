@@ -1,0 +1,34 @@
+[
+	{
+		"name": "90s Rock Anthems",
+		"tracks": [
+			{ "title": "Smells Like Teen Spirit", "artist": "Nirvana" },
+			{ "title": "Wonderwall", "artist": "Oasis" },
+			{ "title": "Creep", "artist": "Radiohead" }
+		]
+	},
+	{
+		"name": "90s Pop Hits",
+		"tracks": [
+			{ "title": "Baby One More Time", "artist": "Britney Spears" },
+			{ "title": "Wannabe", "artist": "Spice Girls" },
+			{ "title": "Genie in a Bottle", "artist": "Christina Aguilera" }
+		]
+	},
+	{
+		"name": "90s Hip Hop Classics",
+		"tracks": [
+			{ "title": "Juicy", "artist": "The Notorious B.I.G." },
+			{ "title": "California Love", "artist": "2Pac" },
+			{ "title": "Nuthin' but a 'G' Thang", "artist": "Dr. Dre" }
+		]
+	},
+	{
+		"name": "90s R&B Favorites",
+		"tracks": [
+			{ "title": "No Scrubs", "artist": "TLC" },
+			{ "title": "Waterfalls", "artist": "TLC" },
+			{ "title": "End of the Road", "artist": "Boyz II Men" }
+		]
+	}
+]

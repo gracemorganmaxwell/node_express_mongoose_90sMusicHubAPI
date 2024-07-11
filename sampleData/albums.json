@@ -1,0 +1,22 @@
+[
+	{
+		"title": "Abbey Road",
+		"artist": "The Beatles",
+		"releaseDate": "1969-09-26T00:00:00.000Z"
+	},
+	{
+		"title": "Thriller",
+		"artist": "Michael Jackson",
+		"releaseDate": "1982-11-30T00:00:00.000Z"
+	},
+	{
+		"title": "The Dark Side of the Moon",
+		"artist": "Pink Floyd",
+		"releaseDate": "1973-03-01T00:00:00.000Z"
+	},
+	{
+		"title": "Rumours",
+		"artist": "Fleetwood Mac",
+		"releaseDate": "1977-02-04T00:00:00.000Z"
+	}
+]

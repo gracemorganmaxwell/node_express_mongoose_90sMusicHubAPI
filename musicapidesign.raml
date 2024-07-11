@@ -1,0 +1,294 @@
+#%RAML 1.0
+title: Music Hub API
+version: v1
+baseUri: http://localhost:3000/api
+
+securitySchemes:
+  JWT:
+    description: Apply this to any API endpoint which needs to be secured by a token
+    type: x-jwt
+    describedBy:
+      headers:
+        Authorization:
+          description: The token in 'Bearer' format
+          type: string
+          required: true
+      responses:
+        401:
+          description: |
+            401 Unauthorized - Invalid or no authentication details provided
+        403:
+          description: |
+            403 Forbidden - Insufficient permissions to access resource
+      queryParameters: 
+        token:
+          description: Token provided to authorize the access to the API
+          type: string
+          required: true
+
+/auth:
+  post:
+    description: Authenticate a user and provide a token
+    body:
+      application/json:
+        example: |
+          {
+            "email": "user@example.com",
+            "password": "password"
+          }
+    responses:
+      200:
+        description: |
+          200 OK - User authenticated successfully
+        body:
+          application/json:
+            example: |
+              {
+                "token": "jwt_token"
+              }
+      401:
+        description: 401 Unauthorized - Invalid credentials
+
+/users:
+  post:
+    description: Register a new user
+    body:
+      application/json:
+        example: |
+          {
+            "email": "user@example.com",
+            "password": "password"
+          }
+    responses:
+      201:
+        description: 201 Created - User registered successfully
+      400:
+        description: 400 Bad Request - Invalid request data
+
+/albums:
+  securedBy: JWT
+  get:
+    description: Get all albums
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "title": "Abbey Road",
+                  "artist": "The Beatles",
+                  "releaseDate": "1969-09-26T00:00:00.000Z"
+                },
+                {
+                  "title": "Thriller",
+                  "artist": "Michael Jackson",
+                  "releaseDate": "1982-11-30T00:00:00.000Z"
+                }
+              ]
+  post:
+    description: Create a new album
+    body:
+      application/json:
+        example: |
+          {
+            "title": "Album Title",
+            "artist": "Artist Name",
+            "releaseDate": "YYYY-MM-DD"
+          }
+    responses:
+      201:
+        description: 201 Created - Album created successfully
+      400:
+        description: 400 Bad Request - Invalid request data
+  /{id}:
+    get:
+      description: Get an album by ID
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "title": "Abbey Road",
+                  "artist": "The Beatles",
+                  "releaseDate": "1969-09-26T00:00:00.000Z"
+                }
+        404:
+          description: 404 Not Found - Album not found
+    put:
+      description: Update an album by ID
+      body:
+        application/json:
+          example: |
+            {
+              "title": "Updated Title",
+              "artist": "Updated Artist",
+              "releaseDate": "YYYY-MM-DD"
+            }
+      responses:
+        200:
+          description: 200 OK - Album updated successfully
+        404:
+          description: 404 Not Found - Album not found
+    delete:
+      description: Delete an album by ID
+      responses:
+        200:
+          description: 200 OK - Album deleted successfully
+        404:
+          description: 404 Not Found - Album not found
+
+/artists:
+  securedBy: JWT
+  get:
+    description: Get all artists
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "name": "The Beatles",
+                  "genre": "Rock"
+                },
+                {
+                  "name": "Michael Jackson",
+                  "genre": "Pop"
+                }
+              ]
+  post:
+    description: Create a new artist
+    body:
+      application/json:
+        example: |
+          {
+            "name": "Artist Name",
+            "genre": "Genre"
+          }
+    responses:
+      201:
+        description: 201 Created - Artist created successfully
+      400:
+        description: 400 Bad Request - Invalid request data
+  /{id}:
+    get:
+      description: Get an artist by ID
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "name": "The Beatles",
+                  "genre": "Rock"
+                }
+        404:
+          description: 404 Not Found - Artist not found
+    put:
+      description: Update an artist by ID
+      body:
+        application/json:
+          example: |
+            {
+              "name": "Updated Name",
+              "genre": "Updated Genre"
+            }
+      responses:
+        200:
+          description: 200 OK - Artist updated successfully
+        404:
+          description: 404 Not Found - Artist not found
+    delete:
+      description: Delete an artist by ID
+      responses:
+        200:
+          description: 200 OK - Artist deleted successfully
+        404:
+          description: 404 Not Found - Artist not found
+
+/playlists:
+  securedBy: JWT
+  get:
+    description: Get all playlists
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "name": "90s Rock Anthems",
+                  "tracks": [
+                    { "title": "Smells Like Teen Spirit", "artist": "Nirvana" },
+                    { "title": "Wonderwall", "artist": "Oasis" },
+                    { "title": "Creep", "artist": "Radiohead" }
+                  ]
+                },
+                {
+                  "name": "90s Pop Hits",
+                  "tracks": [
+                    { "title": "Baby One More Time", "artist": "Britney Spears" },
+                    { "title": "Wannabe", "artist": "Spice Girls" },
+                    { "title": "Genie in a Bottle", "artist": "Christina Aguilera" }
+                  ]
+                }
+              ]
+  post:
+    description: Create a new playlist
+    body:
+      application/json:
+        example: |
+          {
+            "name": "Playlist Name",
+            "tracks": [
+              { "title": "Track Title", "artist": "Track Artist" }
+            ]
+          }
+    responses:
+      201:
+        description: 201 Created - Playlist created successfully
+      400:
+        description: 400 Bad Request - Invalid request data
+  /{id}:
+    get:
+      description: Get a playlist by ID
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "name": "90s Rock Anthems",
+                  "tracks": [
+                    { "title": "Smells Like Teen Spirit", "artist": "Nirvana" },
+                    { "title": "Wonderwall", "artist": "Oasis" },
+                    { "title": "Creep", "artist": "Radiohead" }
+                  ]
+                }
+        404:
+          description: 404 Not Found - Playlist not found
+    put:
+      description: Update a playlist by ID
+      body:
+        application/json:
+          example: |
+            {
+              "name": "Updated Playlist Name",
+              "tracks": [
+                { "title": "Updated Track Title", "artist": "Updated Track Artist" }
+              ]
+            }
+      responses:
+        200:
+          description: 200 OK - Playlist updated successfully
+        404:
+          description: 404 Not Found - Playlist not found
+    delete:
+      description: Delete a playlist by ID
+      responses:
+        200:
+          description: 200 OK - Playlist deleted successfully
+        404:
+          description: 404 Not Found - Playlist not found

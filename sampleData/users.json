@@ -1,0 +1,18 @@
+[
+	{
+		"email": "samuel.smith@test.com",
+		"password": "$2b$10$zXJ4.Yi8xMcbjY0XZQzqSOIty/FfofhOY/KAB9LITmVAK5BtOtXOe" 
+	},
+	{
+		"email": "stefani.germanotta@test.com",
+		"password": "$2b$10$zXJ4.Yi8xMcbjY0XZQzqSOIty/FfofhOY/KAB9LITmVAK5BtOtXOe" 
+	},
+	{
+		"email": "adele.adkins@test.com",
+		"password": "$2b$10$zXJ4.Yi8xMcbjY0XZQzqSOIty/FfofhOY/KAB9LITmVAK5BtOtXOe" 
+	},
+	{
+		"email": "jelena.hadid@test.com",
+		"password": "$2b$10$zXJ4.Yi8xMcbjY0XZQzqSOIty/FfofhOY/KAB9LITmVAK5BtOtXOe"
+	}
+]
