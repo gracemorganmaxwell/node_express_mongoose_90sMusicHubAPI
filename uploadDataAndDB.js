@@ -96,10 +96,7 @@ const playlistsData = [
 
 // Connect to MongoDB Atlas
 mongoose
-	.connect(process.env.MONGO_URI, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-	})
+	.connect(process.env.MONGO_URI)
 	.then(async () => {
 		console.log("Connected to MongoDB");
 
@@ -116,7 +113,7 @@ mongoose
 		await Playlist.insertMany(playlistsData);
 
 		console.log("Sample data inserted successfully");
-		mongoose.disconnect();
+		mongoose.connection.close();
 	})
 	.catch((err) => {
 		console.error("Error connecting to MongoDB", err);
